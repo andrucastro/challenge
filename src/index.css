@@ -50,3 +50,15 @@ a:hover {
 .characters a {
   padding: 1em;
 }
+
+.charactherTable{
+display: flex;
+justify-content: center;
+text-align: left;
+}
+
+.column div{
+  border: 1px white solid;
+  padding: 20px;
+  height: 50px;
+}

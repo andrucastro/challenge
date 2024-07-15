@@ -2,7 +2,8 @@ import React from 'react';
 import api from 'api.js';
 
 function Head({ tabs }) {
-  let eTabs = tabs.map((tab) => {
+  const filteredTabs = tabs.filter( item => item.nav === true )
+  let eTabs = filteredTabs.map((tab) => {
     return <Tab key={tab.id} {...{ tab }} />;
   });
 

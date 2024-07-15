@@ -17,7 +17,7 @@ function Characters() {
   }, []);
 
   if (!data) return '...';
-
+  console.log(data)
   let eCharacters = data.results.map((result) => {
     return (
       <Character
@@ -32,6 +32,7 @@ function Characters() {
   return (
     <div>
       <h2>characters:</h2>
+      <button>characters that worked at Dunder Mifflin Scranton</button>
       <div className="characters">{eCharacters}</div>
     </div>
   );
