@@ -6,7 +6,8 @@ import api from 'api.js';
 function Characters() {
   const [data, setData] = useState(null);
   useEffect(() => {
-    fetch('https://theofficeapi.dev/api/characters?limit=50', {
+    //change the limit to get all the characters
+    fetch('https://theofficeapi.dev/api/characters?limit=83', {
       method: 'GET',
     })
       .then((response) => response.json())
