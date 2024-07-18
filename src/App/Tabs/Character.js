@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 
 function Character({ character }) {
   const [data, setData] = useState(null);
-  console.log(data);
   useEffect(() => {
     fetch(`https://theofficeapi.dev/api/character/${character}`, {
       method: 'GET',
@@ -15,7 +14,7 @@ function Character({ character }) {
   }, [character]);
 
   if (!data) return '...';
-
+  console.log(data)
   return (
     <div>
       <h2>{data.name}</h2>
@@ -29,6 +28,7 @@ function Character({ character }) {
           <div>job</div>
           <div>lastAppearance</div>
           <div>marital</div>
+          <div>Workplace</div>
         </div>
         <div className="column">
           <div>{data.actor ? data.actor : " No information provided " }</div>
@@ -38,6 +38,7 @@ function Character({ character }) {
           <div>{data.job ? data.job : " No information provided "}</div>
           <div>{data.lastAppearance ? data.lastAppearance : " No information provided "}</div>
           <div>{data.marital ? data.marital : " No information provided " }</div>
+          <div>{data.workplace ? data.workplace : " No information provided " }</div>
         </div>
       </div>
     </div>

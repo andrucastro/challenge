@@ -3,37 +3,49 @@ import api from 'api.js';
 
 // Characters
 
+
 function Characters() {
   const [data, setData] = useState(null);
+
+
+function GetEmployeesFromDMF(data){
+  const filteredArray = data.filter(employee => employee.workplace.includes('Dunder Mifflin Scranton'))
+  setData(filteredArray)
+ }
+
   useEffect(() => {
-    //change the limit to get all the characters
-    fetch('https://theofficeapi.dev/api/characters?limit=83', {
-      method: 'GET',
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setData(data);
-      })
-      .catch((error) => console.log(error));
+    const fetchCharacters = async () => {
+      try {
+        //change the limit to get all the characters
+        const response = await fetch('https://theofficeapi.dev/api/characters?limit=83', {
+          method: 'GET',
+        });
+        const data = await response.json();
+        setData(data.results);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchCharacters()
   }, []);
 
   if (!data) return '...';
-  console.log(data)
-  let eCharacters = data.results.map((result) => {
+
+  let eCharacters = data.map((character) => {
     return (
       <Character
-        key={result.id}
-        {...{
-          character: result,
-        }}
+        key={character.id}
+        character={character}
       />
     );
   });
 
+  console.log(eCharacters)
+
   return (
     <div>
       <h2>characters:</h2>
-      <button>characters that worked at Dunder Mifflin Scranton</button>
+      <button onClick={()=>{GetEmployeesFromDMF(data)}}>characters that worked at Dunder Mifflin Scranton</button>
       <div className="characters">{eCharacters}</div>
     </div>
   );
@@ -41,7 +53,12 @@ function Characters() {
 
 function Character({ character }) {
   return (
-    <a onClick={(e) => api.router.click(e, { tab: 'character', character: character.id })} href="/">
+    <a
+      onClick={(e) =>
+        api.router.click(e, { tab: 'character', character: character.id })
+      }
+      href="/"
+    >
       {character.name}
     </a>
   );
